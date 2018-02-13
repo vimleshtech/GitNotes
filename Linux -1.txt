@@ -1,0 +1,84 @@
+===============================
+===============================
+Commmands
+-----------------
+Editor: nano, gedit , vi editor 
+------------------
+User Group And USer
+------------------
+File System	
+------------------
+ 
+Commmands
+=================
+$pwd    		-> current path / dir
+$mkdir  <dirname> 	-> create new dir
+$cd <dirname>		-> change directory
+$cd ..			-> one directory back
+$cd ~			-> go to root 
+$cd -			-> go to previous location 
+$cat  <filename>	-> show content
+$cat  > <filename> 	-> create new file 
+			-> ctrl+Z : save and close 
+$cat  <oldfile> >> <newfile> -> copy the content and paste to other newfile
+
+$rm <filename>
+$rmdir <difname>
+
+$cp <from filename/dirname>  <to>	-> copy and paste on given dir	
+$cp a.txt /etc/a/b.txt
+$cp a.txt /etc/a/
+$cp /etc/b /etc/a/
+
+
+$mv <from filename/dirname>  <to>	-> cut and paste	
+$mv a.txt /etc/a/b.txt
+$mv a.txt /etc/a/
+$mv /etc/b /etc/a/
+
+$ll			-> long list
+$ls			-> small list 
+
+$sudo cat abc.txt	-> run/execute with admin/root permission 
+$su <differentuser>	-> 
+
+$nano <filename.ext>  -> if file is not exit, then new file will create
+		      ->  ctrl+x  : quit 
+ 			   y      : save
+			   n      : no save
+			  ctrl+c  : cacel 				
+$nano <filename.ext>  -> show content/open file  if exist
+		      
+	
+
+$gedit <filename>   -> if file is not exit, then new file will create
+		    -> show content/open file  if exist
+
+$locate <abcd>		-> show list of matched obeject:dir/files
+
+ 
+===================
+package : module : bundle 
+===================
+$apt-get
+$wget
+$yum
+$rpm 
+
+
+User Group And USer
+======================
+$groupadd <gname>
+$useradd <uname> gname 
+
+
+Permission  : 7  (4 r+2 w+1 e) rwx 
+================
+*rwx   : file
+drwx   : dir 
+
+
+
+
+
+
