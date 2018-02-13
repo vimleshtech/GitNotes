@@ -1,0 +1,224 @@
+Install git and create a GitHub account 
+===========================================
+===========================================
+sudo apt-get install git-all
+git --version
+
+--Linux
+$sudo apt-get install git-core
+
+
+Your Identity
+======================================
+======================================
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+$ git config --global core.editor emacs
+
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+
+Checking Your Settings
+==========================
+$ git config --list
+$ git config user.name
+
+
+Remove your user settings:
+==================================
+======================================
+$git config --global --unset user.name
+$git config --global --unset user.email
+
+---or all your global settings:
+
+$git config --global --unset-all
+
+
+
+Create a local git repository 
+======================================
+======================================
+You typically obtain a Git repository in one of two ways:
+
+You can take a local directory that is currently not under version control, and turn it into a Git repository, or
+
+You can clone an existing Git repository from elsewhere.
+
+======================================
+$ cd /home/user/my_project
+$ cd /c/user/my_project
+
+$ git init
+
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+
+
+Create New User
+========================================
+# add new group
+[root@CentOS ~]# groupadd dev
+
+# add new user
+[root@CentOS ~]# useradd -G devs -d /home/gituser -m -s /bin/bash gituser
+
+# change password
+[root@CentOS ~]# passwd gituser
+The above command will produce the following result.
+
+Changing password for user gituser.
+
+New password:
+Retype new password:
+passwd: all authentication token updated successfully.
+Create a Bare Repository
+Let us initialize a new repository by using init command followed by --bare option. It initializes the repository without a working directory. By convention, the bare repository must be named as .git.
+
+[gituser@CentOS ~]$ pwd
+/home/gituser
+
+[gituser@CentOS ~]$ mkdir project.git
+
+[gituser@CentOS ~]$ cd project.git/
+
+[gituser@CentOS project.git]$ ls
+
+
+clone
+===================================
+=================================== 
+$ git clone https://github.com/libgit2/libgit2
+
+If you want to clone the repository into a directory named something other than libgit2, you can specify that as the next command-line optio
+
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+
+This is generally straightforward to do. In order to clone your repository to create a new bare repository, you run the clone command with the --bare option. By convention, bare repository directory names end with the suffix .git, like so:
+
+--bare repo
+
+$ git clone --bare my_project my_project.git
+Cloning into bare repository 'my_project.git'...
+done.
+
+
+commit
+=================
+$ touch mnelson.txt
+$ ls
+$ git status
+$ git add -A
+$ git add filename
+$ git reset filename.txt
+$ git add README
+$ git add CONTRIBUTING.md
+$ git status -s
+$ git commit -m "This is my first commit!"
+
+
+remove 
+===================================
+===================================
+$git rm file1.txt
+$git commit -m "remove file1.txt"
+
+
+***But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+
+$git rm --cached file1.txt
+$git commit -m "remove file1.txt"
+
+-------And to push changes to remote repo
+git push origin branch_name 
+
+
+Create a new branch
+======================================
+$git branch
+$git branch newbranch
+$git checkout newbranch
+$git add -a
+$git commit -m 'aaa'
+$ git checkout master
+
+To create a branch and switch to it at the same time, you can run the git checkout command with the -b switch:
+
+$ git checkout -b iss53
+--other command 
+
+$ git branch iss53
+$ git checkout iss53
+
+--merge 
+$ git checkout master
+$ git merge iss53
+
+--delete  branch 
+$ git branch -d branchname
+
+$ git status
+
+
+$ git branch
+$ git branch -v
+
+$ git branch --merged
+$ git branch --no-merged
+$ git branch -d testing
+
+
+create new repo on hithug
+====================================
+
+https://github.com/vimleshtech/mynewrepository.git
+
+…or create a new repository on the command line
+
+echo "# mynewrepository" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/vimleshtech/mynewrepository.git
+git push -u origin mast
+
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/vimleshtech/mynewrepository.git
+
+git push -u origin master
+
+-----add to repo or push to repo 
+
+$git remote add torigin https://github.com/vimleshtech/mynewrepository.git
+$ git push -u torigin master
+$ git push torigin my-new-branch
+
+
+----pull 
+git pull origin master<branchname>
+
+
+--check log 
+$ git log
+
+$ git show cbe1249b140dad24b2c35b15cc7e26a6f02d2277
+$ git diff
++
+-
+
+
+
+
+
+
+
+
+
+
+
+

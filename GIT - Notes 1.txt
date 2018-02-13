@@ -1,0 +1,336 @@
+Git Terms
+===========================================
+===========================================
+-Blobs
+Blob stands for Binary Large Object. Each version of a file is 
+represented by blob. A blob holds the file data but doesn’t contain 
+any metadata about the file. It is a binary file, and in Git database, it is named as SHA1 hash of that file. In Git, files are not addressed by names. Everything is content-addressed.
+
+	*blob
+	*metadata/head
+
+-Trees
+Tree is an object, which represents a directory. It holds blobs as well as other sub-directories. A tree is a binary file that stores references to blobs and trees which are also named as SHA1 hash of the tree object.
+
+-Commits
+Commit holds the current state of the repository. A commit is also named by SHA1 hash. You can consider a commit object as a node of the linked list. Every commit object has a pointer to the parent commit object. From a given commit, you can traverse back by looking at the parent pointer to view the history of the commit. If a commit has multiple parent commits, then that particular commit has been created by merging two branches.
+
+-Branches
+Branches are used to create another line of development. By default, Git has a master branch, which is same as trunk in Subversion. Usually, a branch is created to work on a new feature. Once the feature is completed, it is merged back with the master branch and we delete the branch. Every branch is referenced by HEAD, which points to the latest commit in the branch. Whenever you make a commit, HEAD is updated with the latest commit.
+
+-Tags
+Tag assigns a meaningful name with a specific version in the repository. Tags are very similar to branches, but the difference is that tags are immutable. It means, tag is a branch, which nobody intends to modify. Once a tag is created for a particular commit, even if you create a new commit, it will not be updated. Usually, developers create tags for product releases.
+
+-Clone
+Clone operation creates the instance of the repository. Clone operation not only checks out the working copy, but it also mirrors the complete repository. Users can perform many operations with this local repository. The only time networking gets involved is when the repository instances are being synchronized.
+
+-Pull
+Pull operation copies the changes from a remote repository instance to a local one. The pull operation is used for synchronization between two repository instances. This is same as the update operation in Subversion.
+
+-Push
+Push operation copies changes from a local repository instance to a remote one. This is used to store the changes permanently into the Git repository. This is same as the commit operation in Subversion.
+
+-HEAD
+HEAD is a pointer, which always points to the latest commit in the branch. Whenever you make a commit, HEAD is updated with the latest commit. The heads of the branches are stored in .git/refs/heads/ directory.
+
+Install git and create a GitHub account 
+===========================================
+===========================================
+sudo apt-get install git-all
+git --version
+
+--Linux
+$sudo apt-get install git-core
+
+-----------------------------------------------
+Git comes with a tool called git config that lets you get and set configuration variables that control all aspects of how Git looks and operates. These variables can be stored in three different places:
+
+/etc/gitconfig file: Contains values applied to every user on the system and all their repositories. If you pass the option --system to git config, it reads and writes from this file specifically. (Because this is a system configuration file, you would need administrative or superuser privilege to make changes to it.)
+
+~/.gitconfig or ~/.config/git/config file: Values specific personally to you, the user. You can make Git read and write to this file specifically by passing the --global option.
+
+config file in the Git directory (that is, .git/config) of whatever repository you’re currently using: Specific to that single repository.
+
+Each level overrides values in the previous level, so values in .git/config trump those in /etc/gitconfig.
+
+On Windows systems, Git looks for the .gitconfig file in the $HOME directory (C:\Users\$USER for most people). It also still looks for /etc/gitconfig, although it’s relative to the MSys root, which is wherever you decide to install Git on your Windows system when you run the installer. If you are using version 2.x or later of Git for Windows, there is also a system-level config file at C:\Documents and Settings\All Users\Application Data\Git\config on Windows XP, and in C:\ProgramData\Git\config on Windows Vista and newer. This config file can only be changed by git config -f <file> as an admin
+
+
+Your Identity
+======================================
+======================================
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+$ git config --global core.editor emacs
+
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+
+Checking Your Settings
+==========================
+$ git config --list
+$ git config user.name
+
+
+Remove your user settings:
+==================================
+======================================
+$git config --global --unset user.name
+$git config --global --unset user.email
+
+---or all your global settings:
+
+$git config --global --unset-all
+
+
+
+Create a local git repository 
+======================================
+======================================
+You typically obtain a Git repository in one of two ways:
+
+You can take a local directory that is currently not under version control, and turn it into a Git repository, or
+
+You can clone an existing Git repository from elsewhere.
+
+======================================
+$ cd /home/user/my_project
+$ cd /c/user/my_project
+
+$ git init
+
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+
+
+Create New User
+========================================
+# add new group
+[root@CentOS ~]# groupadd dev
+
+# add new user
+[root@CentOS ~]# useradd -G devs -d /home/gituser -m -s /bin/bash gituser
+
+# change password
+[root@CentOS ~]# passwd gituser
+The above command will produce the following result.
+
+Changing password for user gituser.
+
+New password:
+Retype new password:
+passwd: all authentication token updated successfully.
+Create a Bare Repository
+Let us initialize a new repository by using init command followed by --bare option. It initializes the repository without a working directory. By convention, the bare repository must be named as .git.
+
+[gituser@CentOS ~]$ pwd
+/home/gituser
+
+[gituser@CentOS ~]$ mkdir project.git
+
+[gituser@CentOS ~]$ cd project.git/
+
+[gituser@CentOS project.git]$ ls
+
+[gituser@CentOS project.git]$ git --bare init
+Initialized empty Git repository in /home/gituser-m/project.git/
+
+[gituser@CentOS project.git]$ ls
+branches config description HEAD hooks info objects refs
+Generate Public/Private RSA Key Pair
+Let us walk through the process of configuring a Git server, ssh-keygen utility generates public/private RSA key pair, that we will use for user authentication.
+
+Open a terminal and enter the following command and just press enter for each input. After successful completion, it will create a .ssh directory inside the home directory.
+
+tom@CentOS ~]$ pwd
+/home/tom
+
+[tom@CentOS ~]$ ssh-keygen
+The above command will produce the following result.
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/tom/.ssh/id_rsa): Press Enter Only
+Created directory '/home/tom/.ssh'.
+Enter passphrase (empty for no passphrase): ---------------> Press Enter Only
+Enter same passphrase again: ------------------------------> Press Enter Only
+Your identification has been saved in /home/tom/.ssh/id_rsa.
+Your public key has been saved in /home/tom/.ssh/id_rsa.pub.
+The key fingerprint is:
+df:93:8c:a1:b8:b7:67:69:3a:1f:65:e8:0e:e9:25:a1 tom@CentOS
+The key's randomart image is:
++--[ RSA 2048]----+
+| |
+| |
+| |
+|
+.
+|
+| Soo |
+| o*B. |
+| E = *.= |
+| oo==. . |
+| ..+Oo
+|
++-----------------+
+ssh-keygen has generated two keys, first one is private (i.e., id_rsa) and the second one is public (i.e., id_rsa.pub).
+
+Note: Never share your PRIVATE KEY with others.
+
+Adding Keys to authorized_keys
+Suppose there are two developers working on a project, namely Tom and Jerry. Both users have generated public keys. Let us see how to use these keys for authentication.
+
+Tom added his public key to the server by using ssh-copy-id command as given below:
+
+[tom@CentOS ~]$ pwd
+/home/tom
+
+[tom@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa.pub gituser@git.server.com
+The above command will produce the following result.
+
+gituser@git.server.com's password:
+Now try logging into the machine, with "ssh 'gituser@git.server.com'", and check in:
+.ssh/authorized_keys
+to make sure we haven't added extra keys that you weren't expecting.
+Similarly, Jerry added his public key to the server by using ssh-copy-id command.
+
+[jerry@CentOS ~]$ pwd
+/home/jerry
+
+[jerry@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa gituser@git.server.com
+The above command will produce the following result.
+
+gituser@git.server.com's password:
+Now try logging into the machine, with "ssh 'gituser@git.server.com'", and check in:
+.ssh/authorized_keys
+to make sure we haven't added extra keys that you weren't expecting
+
+clone
+===================================
+=================================== 
+$ git clone https://github.com/libgit2/libgit2
+
+If you want to clone the repository into a directory named something other than libgit2, you can specify that as the next command-line optio
+
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+
+This is generally straightforward to do. In order to clone your repository to create a new bare repository, you run the clone command with the --bare option. By convention, bare repository directory names end with the suffix .git, like so:
+
+--bare repo
+
+$ git clone --bare my_project my_project.git
+Cloning into bare repository 'my_project.git'...
+done.
+
+
+This is roughly equivalent to something like
+
+$ cp -Rf my_project/.git my_project.git
+
+commit
+=================
+$ touch mnelson.txt
+$ ls
+$ git status
+$ git add -A
+$ git add filename
+$ git reset filename.txt
+$ git add README
+$ git add CONTRIBUTING.md
+$ git status -s
+$ git commit -m "This is my first commit!"
+
+
+remove 
+===================================
+===================================
+$git rm file1.txt
+$git commit -m "remove file1.txt"
+
+
+***But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+
+$git rm --cached file1.txt
+$git commit -m "remove file1.txt"
+
+-------And to push changes to remote repo
+git push origin branch_name 
+
+
+Create a new branch
+======================================
+$git branch
+$git branch newbranch
+$git checkout newbranch
+$git add -a
+$git commit -m 'aaa'
+$ git checkout master
+
+To create a branch and switch to it at the same time, you can run the git checkout command with the -b switch:
+
+$ git checkout -b iss53
+--other command 
+
+$ git branch iss53
+$ git checkout iss53
+
+--merge 
+$ git checkout master
+$ git merge iss53
+
+--delete  branch 
+$ git branch -d branchname
+
+$ git status
+
+
+$ git branch
+$ git branch -v
+
+$ git branch --merged
+$ git branch --no-merged
+$ git branch -d testing
+
+
+create new repo on hithug
+====================================
+
+https://github.com/vimleshtech/mynewrepository.git
+
+…or create a new repository on the command line
+
+echo "# mynewrepository" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/vimleshtech/mynewrepository.git
+git push -u origin mast
+
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/vimleshtech/mynewrepository.git
+
+git push -u origin master
+
+-----add to repo or push to repo 
+
+$git remote add torigin https://github.com/vimleshtech/mynewrepository.git
+$ git push -u torigin master
+$ git push torigin my-new-branch
+
+
+----pull 
+git pull origin master<branchname>
+
+
+--check log 
+$ git log
+
+$ git show cbe1249b140dad24b2c35b15cc7e26a6f02d2277
+$ git diff
++
+-
+

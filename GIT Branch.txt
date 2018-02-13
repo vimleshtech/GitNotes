@@ -1,0 +1,34 @@
+Branch : is group of files which represt particular version of code /
+===========================
+Default Branch : master
+New Branch     : git branch <new branch>
+switch to branch: git checkout <new branch>
+
+
+--merge 
+$ git checkout master
+$ git merge iss53
+
+--delete  branch 
+$ git branch -d branchname
+
+
+remove 
+===================================
+===================================
+$git rm file1.txt
+$git commit -m "remove file1.txt"
+
+
+***But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+
+$git rm --cached file1.txt
+$git commit -m "remove file1.txt"
+
+
+
+
+
+git add torigin https://www.github.com/vimleshtech/newrepo.git
+git push -u torigin master
+
