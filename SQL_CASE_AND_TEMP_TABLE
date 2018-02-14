@@ -1,0 +1,54 @@
+create database hrms --create database 
+
+use hrms  --switch database 
+
+create table #temp 
+(
+id int,
+name varchar(100),
+gender char(1)
+)
+
+alter table #temp 
+add hra int, basic int
+
+update #temp 
+set basic =60000,hra = 30000
+where id = 5
+
+insert into #temp 
+values(1,'raman','m'),
+(2,'ayush','m'),
+(3,'monika','f'),
+(4,'jatin','f'),
+(5,'chahat','f')
+
+select * From #temp 
+
+select 
+	id,name,	
+	case when gender  ='m'
+		 then 
+				'male'
+		 else 
+				'femlae'
+		end 
+	,hra+basic as monthly_sal
+	,(hra+basic )*12 as anual_sal
+	,case when ((hra+basic )*12) <300000 
+	     then 
+				0
+		 else case when ((hra+basic )*12)<500000
+		      then 
+					(((hra+basic )*12)-300000)*.05	
+			   else case when ((hra+basic )*12)<1000000 
+			       then 
+						10000+(((hra+basic )*12)-500000)*.20	
+
+					else 
+						110000+(((hra+basic )*12)-1000000)*.30	
+					end
+			end 
+		end  as tax
+from #temp
+
