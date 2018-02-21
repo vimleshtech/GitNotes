@@ -1,0 +1,36 @@
+Code (java-Mavean/Python) -> GitHub -> Jenkins -> Ansible 
+	-> Deployement 
+
+
+Steps:
+	1. Create New Repository	
+		https://github.com/vimleshtech/DevopsProject.git
+	2. Create folder on local system
+		-> take clone from GitHub Repository 
+	3. Create New  Mavean Project in Eclipse (neon 3)
+		-> link with local repository
+	4. Commit -> Then Push
+	5. Jenkins -> Build and Automation Tool
+		C:\Program Files (x86)\Jenkins\
+
+		Admin Password:
+
+	C:\Program Files (x86)\Jenkins\secrets\initialAdminPassword
+	
+	Jenkins User: testuser
+		    : user@951
+
+		
+	
+
+
+
+
+		
+
+		
+
+	
+ 	
+		
+		
