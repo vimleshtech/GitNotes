@@ -1,0 +1,26 @@
+https://lintut.com/how-to-setup-network-after-rhelcentos-7-minimal-
+
+installation/
+
+sshkey
+-------
+$ssh-keygen
+$cat ~/.ssh/id_rsa.pub
+$ssh-copy-id -i ~/.ssh/id_rsa.pub username@ipaddress
+$ssh username@ipaddress
+
+system update
+------------------
+$sudo yum update
+
+install
+------------------------------
+$sudo yum mysql-server
+	-> set password
+$sudo yum apache-server
+$sudo yum git					
+$sudo yum oracle-jdk1.8.jar
+		
+
+
+	
