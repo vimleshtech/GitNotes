@@ -1,0 +1,41 @@
+DevOps
+=====================
+https://github.com/vimleshtech/pro1.git
+
+GitHub(local repository)
+	
+	->Mavean : is framework to build and manage project dependency
+		->Junit: is framework of unit testing 
+			->Jenkins 
+				 ->Ansible
+				 ->Chef
+				 ->Puppet
+			
+				
+				 ->Docker 
+					->sensu				
+=======================================================
+
+*************************************************************
+Template:
+	jinja template (jinja2)
+		-file extension must be .j2
+================================================
+Hosts
+----------------------------
+db1:  a.j2
+	mysql server 5.5
+db2: b.j2
+	mysql server 5.6
+db3: c.j2
+	mysql server 5.7
+
+
+playbook:
+	data
+		->jinja2
+	
+
+	
+
+
